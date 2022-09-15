@@ -12,14 +12,14 @@
 </head>
 <body>
     <div class="container">
-        <h1 class="title"><strong>HIGH</strong></h1>
+        <h1 class="title"><strong>ВАЖНЫЕ ДЕЛА</strong></h1>
         <form>
             <div class="new-task">
-                <input class="new-task__input" type="text" placeholder="Добавить важное дело">
-                <button class="new-task__button" type="submit"></button>
+                <input class="new-task__input-high high" type="text" placeholder="Добавить важное дело">
+                <button class="new-task__button-high high" type="submit"></button>
             </div>
         </form>
-        <ul class="todo-list">
+        <ul class="todo-list-high">
             <li class="todo-list-item">
                 <label>
                     <div class="todo-list-input"></div>
@@ -52,14 +52,14 @@
             </li>
         </ul>
 
-        <h1 class="title"><strong>LOW</strong></h1>
+        <h1 class="title"><strong>НЕВАЖНЫЕ ДЕЛА</strong></h1>
         <form>
             <div class="new-task">
-                <input class="new-task__input" type="text" placeholder="Добавить">
-                <button class="new-task__button" type="submit"></button>
+                <input class="new-task__input-low low" type="text" placeholder="Добавить">
+                <button class="new-task__button-low low" type="submit"></button>
             </div>
         </form>
-        <ul class="todo-list">
+        <ul class="todo-list-low">
             <li class="todo-list-item">
                 <label>
                     <div class="todo-list-input"></div>
@@ -71,6 +71,15 @@
             </li>
         </ul>
     </div>
+    <template id="task-template">
+        <li class="todo-list-item">
+            <label>
+                <div class="todo-list-input"></div>
+                <span></span>
+                <div class="todo-list-button"></div>
+            </label>
+        </li>
+    </template>
     <script src="main.js"></script>
 </body>
 </html>
