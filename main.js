@@ -37,12 +37,17 @@ function render() {
                     deleteTask(taskDescription.textContent);
                 });
 
+                if (item.status === STATUS.DONE) {
+                    const checkbox = task.querySelector('.todo-list-input');
+                    checkbox.parentElement.parentElement.classList.add('checked');
+                    checkbox.classList.add('checked');
+                }
+
                 const taskChangeStatus = task.querySelector('.todo-list-input');
                 taskChangeStatus.addEventListener('click', function() {
-                    this.classList.add('checked');
-                    this.parentElement.parentElement.classList.add('checked');
                     changeStatus(taskDescription.textContent, STATUS.DONE);
                 });
+                
                 highList.appendChild(task);
             } else if (key === 'name' && item.priority === PRIORITY.LOW) {
                 const task = newItemTemplate.cloneNode(true);
@@ -54,10 +59,14 @@ function render() {
                     deleteTask(taskDescription.textContent);
                 });
 
+                if (item.status === STATUS.DONE) {
+                    const checkbox = task.querySelector('.todo-list-input');
+                    checkbox.parentElement.parentElement.classList.add('checked');
+                    checkbox.classList.add('checked');
+                }
+
                 const taskChangeStatus = task.querySelector('.todo-list-input');
                 taskChangeStatus.addEventListener('click', function() {
-                    this.classList.add('checked');
-                    this.parentElement.parentElement.classList.add('checked');
                     changeStatus(taskDescription.textContent, STATUS.DONE);
                 });
                 lowList.appendChild(task);
@@ -81,7 +90,7 @@ addHighTask.addEventListener('click', function(event) {
     inputHighTask.value = '';
     render();
     deleteButtons = document.querySelectorAll('.todo-list-button');
-    console.log(taskList);
+    
 });
 
 addLowTask.addEventListener('click', function(event) {
@@ -97,7 +106,7 @@ addLowTask.addEventListener('click', function(event) {
     inputLowTask.value = '';
     render();
     deleteButtons = document.querySelectorAll('.todo-list-button');
-    console.log(taskList);
+    
 });
 
 function deleteTask(task) {
@@ -107,7 +116,7 @@ function deleteTask(task) {
             console.log('Такой задачи не существует.');
         } else {
             taskList.splice(resultIndex, 1);
-            console.log(taskList);
+            
         };
         render();
 };
@@ -118,6 +127,6 @@ function changeStatus(task, status) {
             item.status = status;
         };
     });
-    console.log(taskList);
+    
     render();
 };
