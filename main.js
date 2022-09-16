@@ -96,18 +96,14 @@ UI_ELEMENTS.ADD_LOW_TASK.addEventListener('click', function(event) {
     
     taskList.push(newTask);
     UI_ELEMENTS.INPUT_LOW_TASK.value = '';
-    render(); 
+    render();
 });
 // Удаляем таску
 function deleteTask(task) {
     let resultIndex = taskList.findIndex(item => item.name === task)
     
-        if (resultIndex === -1) {
-            console.log('Такой задачи не существует.');
-        } else {
-            taskList.splice(resultIndex, 1);
-            
-        };
+        taskList.splice(resultIndex, 1);   
+
         render();
 };
 // Меняем статус таски
