@@ -1,13 +1,16 @@
-const addHighTask = document.querySelector('.new-task__button-high');
-const inputHighTask = document.querySelector('.new-task__input-high');
-const highList = document.querySelector('.todo-list-high');
-const addLowTask = document.querySelector('.new-task__button-low');
-const inputLowTask = document.querySelector('.new-task__input-low');
-const lowList = document.querySelector('.todo-list-low');
-let deleteButtons = document.querySelectorAll('.todo-list-button');
+import { UI_ELEMENTS } from "./view";
 
 const taskTemplate = document.querySelector('#task-template').content;
 const newItemTemplate = taskTemplate.querySelector('.todo-list-item');
+
+// const UI_ELEMENTS = {
+//     ADD_HIGH_TASK: document.querySelector('.new-task__button-high'),
+//     INPUT_HIGH_TASK: document.querySelector('.new-task__input-high'),
+//     HIGH_LIST: document.querySelector('.todo-list-high'),
+//     ADD_LOW_TASK: document.querySelector('.new-task__button-low'),
+//     INPUT_LOW_TASK: document.querySelector('.new-task__input-low'),
+//     LOW_LIST: document.querySelector('.todo-list-low'),
+// }
 
 let taskList = [];
 
@@ -20,10 +23,10 @@ const PRIORITY = {
     HIGH: 'high',
     LOW: 'low',
 };
-
+// Рисуем UI
 function render() {
-    highList.innerHTML = '';
-    lowList.innerHTML = '';
+    UI_ELEMENTS.HIGH_LIST.innerHTML = '';
+    UI_ELEMENTS.LOW_LIST.innerHTML = '';
 
     taskList.forEach(function(item) {
         for (let key in item) {
@@ -48,7 +51,7 @@ function render() {
                     changeStatus(taskDescription.textContent, STATUS.DONE);
                 });
                 
-                highList.appendChild(task);
+                UI_ELEMENTS.HIGH_LIST.appendChild(task);
             } else if (key === 'name' && item.priority === PRIORITY.LOW) {
                 const task = newItemTemplate.cloneNode(true);
                 const taskDescription = task.querySelector('span');
@@ -69,46 +72,42 @@ function render() {
                 taskChangeStatus.addEventListener('click', function() {
                     changeStatus(taskDescription.textContent, STATUS.DONE);
                 });
-                lowList.appendChild(task);
+                UI_ELEMENTS.LOW_LIST.appendChild(task);
             };
         };
     });
 };
 
 render();
-
-addHighTask.addEventListener('click', function(event) {
+// Добавляем дело с высокой важностью
+UI_ELEMENTS.ADD_HIGH_TASK.addEventListener('click', function(event) {
     event.preventDefault();
 
     let newTask = {};
 
-    newTask.name = inputHighTask.value;
+    newTask.name = UI_ELEMENTS.INPUT_HIGH_TASK.value;
     newTask.status = STATUS.TO_DO;
     newTask.priority = PRIORITY.HIGH;
     
     taskList.push(newTask);
-    inputHighTask.value = '';
-    render();
-    deleteButtons = document.querySelectorAll('.todo-list-button');
-    
+    UI_ELEMENTS.INPUT_HIGH_TASK.value = '';
+    render();    
 });
-
-addLowTask.addEventListener('click', function(event) {
+// Добавляем дело с низкой важностью
+UI_ELEMENTS.ADD_LOW_TASK.addEventListener('click', function(event) {
     event.preventDefault();
 
     let newTask = {};
 
-    newTask.name = inputLowTask.value;
+    newTask.name = UI_ELEMENTS.INPUT_LOW_TASK.value;
     newTask.status = STATUS.TO_DO;
     newTask.priority = PRIORITY.LOW;
     
     taskList.push(newTask);
-    inputLowTask.value = '';
-    render();
-    deleteButtons = document.querySelectorAll('.todo-list-button');
-    
+    UI_ELEMENTS.INPUT_LOW_TASK.value = '';
+    render(); 
 });
-
+// Удаляем таску
 function deleteTask(task) {
     let resultIndex = taskList.findIndex(item => item.name === task)
     
@@ -120,13 +119,12 @@ function deleteTask(task) {
         };
         render();
 };
-
+// Меняем статус таски
 function changeStatus(task, status) {
     taskList.map(function(item) {
         if (item.name === task) {
             item.status = status;
         };
     });
-    
     render();
 };
