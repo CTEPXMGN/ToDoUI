@@ -74,11 +74,13 @@ render();
 UI_ELEMENTS.ADD_HIGH_TASK.addEventListener('click', function(event) {
     event.preventDefault();
 
-    let newTask = {};
+    function Task(text, status, priority) {
+        this.name = text;
+        this.status = status;
+        this.priority = priority;
+    }
 
-    newTask.name = UI_ELEMENTS.INPUT_HIGH_TASK.value;
-    newTask.status = STATUS.TO_DO;
-    newTask.priority = PRIORITY.HIGH;
+    const newTask = new Task(UI_ELEMENTS.INPUT_HIGH_TASK.value, STATUS.TO_DO, PRIORITY.HIGH);
     
     taskList.push(newTask);
     UI_ELEMENTS.INPUT_HIGH_TASK.value = '';
@@ -88,11 +90,14 @@ UI_ELEMENTS.ADD_HIGH_TASK.addEventListener('click', function(event) {
 UI_ELEMENTS.ADD_LOW_TASK.addEventListener('click', function(event) {
     event.preventDefault();
 
-    let newTask = {};
+    function Task(text, status, priority) {
+        this.name = text;
+        this.status = status;
+        this.priority = priority;
+    }
 
-    newTask.name = UI_ELEMENTS.INPUT_LOW_TASK.value;
-    newTask.status = STATUS.TO_DO;
-    newTask.priority = PRIORITY.LOW;
+    const newTask = new Task(UI_ELEMENTS.INPUT_LOW_TASK.value, STATUS.TO_DO, PRIORITY.LOW);
+    
     
     taskList.push(newTask);
     UI_ELEMENTS.INPUT_LOW_TASK.value = '';
